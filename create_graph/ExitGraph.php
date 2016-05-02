@@ -102,6 +102,8 @@ class ExitGraph extends Graph
 		self::setConstructFile($size,$cycle);
 
 		$adjectMatriz=(self::getMatrizGraph());
+		echo "<pre>";
+		print_r($adjectMatriz);
 
 		$listMatrizGrade=(self::getListGrade());
 
