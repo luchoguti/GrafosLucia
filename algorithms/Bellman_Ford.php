@@ -1,5 +1,4 @@
 <?php
-<<<<<<< e742090003f18761b25ab9ce163e81978ef4635c
 
 define('INFINITY', 10000000);
  
@@ -38,8 +37,9 @@ function BellmanFord(&$matrix, &$dist, $start)
 BellmanFord($matrix, $dist, 0);
  
 // [0, 2, 4]
+
 print_r($dist);
-=======
+
 /* {Origen, destino, distancia} */
 /*{source, destination, distance}*/
  
@@ -128,4 +128,5 @@ function BELLMAN_FORD($edges, $edgecount, $nodecount, $source) {
    return;
  
 }
->>>>>>> Nuevos algoritmo
+print_r($dist);
+

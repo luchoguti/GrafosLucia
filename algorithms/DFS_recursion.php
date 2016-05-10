@@ -32,11 +32,6 @@ class Graph
     public function depthFirst($vertex)
     {
         $this->_visited[$vertex] = 1;
-<<<<<<< e742090003f18761b25ab9ce163e81978ef4635c
- 
-=======
- //Retorna los visitados en forma de cola.
->>>>>>> Nuevos algoritmo
         echo $vertex . "\n";
  
         for ($i = 0; $i < $this->_len; $i++) {
