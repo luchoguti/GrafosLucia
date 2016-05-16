@@ -14,10 +14,10 @@ function dijstra($graphs, $source, $target){
 		$neighbours[$edge[0]][] = array ('endEdge' => $edge[1], 'cost' => $edge[2]);
 
 	}
-	/*echo '<pre>';
-	print_r($neighbours);*/
+	echo '<pre>';
+	print_r($neighbours);
 
-		//Eliminar las vertices repetidas que se ingresaron en la función array_push 
+	//Eliminar las vertices repetidas que se ingresaron en la función array_push 
 	$vertices = array_unique($vertices);
 
 	foreach ($vertices as $vertex) {
@@ -29,7 +29,7 @@ function dijstra($graphs, $source, $target){
 
 	$dist[$source] = 0;
 	$g = $vertices;
-
+//	print_r($g);
 	while (count($g) > 0) {
 		$min = INF;
 		foreach ($g as $vertex) {
@@ -38,10 +38,10 @@ function dijstra($graphs, $source, $target){
 				$u = $vertex;
 			}
 		}
-		/*echo $min.'||'.$u.'<br>';*/
+		echo $min.'||'.$u.'<br>';
 		//Compara los arreglos y retorna la diferencia entre las posisiciones o valores que existen en el primer arreglo y no en el segundo arreglo
 		$g = array_diff($g, array($u));
-
+print_r($g);
 		if ($dist[$u] == INF or $u == $target) {
 			break;
 		}
@@ -49,21 +49,21 @@ function dijstra($graphs, $source, $target){
 		if (isset($neighbours[$u])) {
 			foreach ($neighbours[$u] as $arr) {
 				$alt = $dist[$u] + $arr["cost"];
-				/*echo 'vecino-'.$alt.'<br>';*/
+				echo $dist[$u].'vecino-'.$alt.'<br>';
 				$dist[$arr["endEdge"]] = $alt;
 				$previous[$arr["endEdge"]] = $u;
 			}
 		}
-		/*echo '<pre>';
+		echo '<pre>';
 		print_r($previous);
 		echo '<pre>';
-		print_r($dist);*/
+		print_r($dist);
 	}
 	//final 
-	/*echo 'final<pre>';
+	echo 'final<pre>';
 	print_r($dist);
 	echo '<pre>';
-	print_r($previous);*/
+	print_r($previous);
 	
 	//buscar el camino de los nodos visitados y que encontro como el camino corto
 	$u = $target;
@@ -72,8 +72,8 @@ function dijstra($graphs, $source, $target){
 		$u = $previous[$u];
 	}
 
-	array_unshift($path,$u);
+	//array_unshift($path,$u);
 
 	/*print_r($path);*/
-	return $path;
+	//return $path;
 }

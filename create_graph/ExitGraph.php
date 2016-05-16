@@ -8,15 +8,75 @@
 class ExitGraph extends Graph
 {
 	
-	protected $matrizGraph;
 	public $objectMatriz = array();
-	private $matrizGrade = array();
 	public $matrizListGrade = array();
 
+	protected $matrizGraph;
 	protected $matrizExit = array();
-
 	protected $file;
+	protected $valueDimensions;
+	protected $valueNum_graph;
+	protected $adjectMatriz = array();
+	protected $costGraphPositive = array();
+	protected $costGraphPositiveOrNega = array();
+
+	private $matrizGrade = array();
+	
+	
+	public function __construct($dimensions,$num_graph){
+
+		$constMatriz = new Graph();		
+
+		for ($f=0; $f < $num_graph; $f++) { 
 		
+			$constMatriz->setMatriz($dimensions);
+			
+			$dataMatriz =$constMatriz->getMatriz();
+			
+			$this->objectMatriz[] = $dataMatriz;
+
+			self::listGrade($dataMatriz);
+
+			$this->matrizListGrade[] = self::getGrade();
+		
+			$this->matrizGrade = array();
+		}
+
+		$getAdjectMatriz=(self::getMatrizGraph());
+
+		$this->adjectMatriz = $getAdjectMatriz;
+		$this->valueDimensions =$dimensions;
+		$this->valueNum_graph =$num_graph;
+
+		self::setArtist_graph();
+    
+  	}
+
+  	protected function setArtist_graph(){
+
+  		$costGrahp1=array();
+  		$costGrahp2=array();
+  		for ($j=0; $j < $this->valueNum_graph; $j++) { 
+  			for ($k=0; $k < $this->valueDimensions; $k++) {  					
+	  			for ($l=0; $l < $this->valueDimensions; $l++) { 
+	  				
+	  				if($this->adjectMatriz[$j][$k][$l]==1){
+ 					
+ 						$costGrahp1[$j][$k][$l]=rand(1,10);
+ 						$costGrahp2[$j][$k][$l]=rand(-10,10);
+
+	  				}
+
+	  			}
+
+		  	}
+	  	}
+	  	$this->costGraphPositive=$costGrahp1;
+	  	$this->costGraphPositiveOrNega=$costGrahp2;
+	  		
+
+  	}
+
 	protected function listGrade($matriz){
 
 
@@ -60,27 +120,6 @@ class ExitGraph extends Graph
 
 	}
 
-	public function setConstructFile($size,$cycle){
-
-		$constMatriz = new Graph();		
-
-		for ($f=0; $f < $cycle ; $f++) { 
-		
-			$constMatriz->setMatriz($size);
-			
-			$dataMatriz =$constMatriz->getMatriz();
-			
-			$this->objectMatriz[] = $dataMatriz;
-
-			self::listGrade($dataMatriz);
-
-			$this->matrizListGrade[] = self::getGrade();
-		
-			$this->matrizGrade = array();
-		}
-
-	}
-
 	public function getMatrizGraph(){
 
 		return $this->objectMatriz;
@@ -92,29 +131,24 @@ class ExitGraph extends Graph
 
 	}
 
-	public function setCreateFile($size,$cycle){
+	public function setCreateFile_output(){
 
-		$node = $size*2;
-		$this->file = $cycle.'<br>';
-		$this->file .= $size.'x'.$size.'<br>';
+		$node = $this->valueDimensions*2;
+		$this->file = $this->valueNum_graph.'<br>';
+		$this->file .= $this->valueDimensions.'x'.$this->valueDimensions.'<br>';
 		$this->file .= $node;
 
-		self::setConstructFile($size,$cycle);
-
-		$adjectMatriz=(self::getMatrizGraph());
-		echo "<pre>";
-		print_r($adjectMatriz);
-
 		$listMatrizGrade=(self::getListGrade());
+		echo "<pre>";
+		print_r($this->adjectMatriz);
+		for ($q=0; $q < count($this->adjectMatriz); $q++) { 
 
-		for ($q=0; $q < count($adjectMatriz); $q++) { 
-
-			for ($r=0; $r < count($adjectMatriz[$q]); $r++) { 
+			for ($r=0; $r < count($this->adjectMatriz[$q]); $r++) { 
 				
 				$stringAdject='';
-				for ($s=0; $s < count($adjectMatriz[$q][$r]) ; $s++) { 
+				for ($s=0; $s < count($this->adjectMatriz[$q][$r]) ; $s++) { 
 					
-					$stringAdject .= $adjectMatriz[$q][$s][$r];
+					$stringAdject .= $this->adjectMatriz[$q][$s][$r];
 
 				}
 				$this->file .= '<br>'.$stringAdject;

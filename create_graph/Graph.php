@@ -1,6 +1,6 @@
 <?php
 
-	include_once("GraphMain.php");
+	include("GraphMain.php");
 	
 
 	/**
