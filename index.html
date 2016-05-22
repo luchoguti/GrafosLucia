@@ -8,8 +8,16 @@
 	<script type="text/javascript" src="js/bootstrap-3.3.4.js"></script>
 	<script type="text/javascript">
 		function runAlgorithm(caseAlgort) {
-			
-			location.href = "execute_algorithm.php?numExecute="+caseAlgort+"";
+			var changeGraph=$('#changeGraph').val();
+			location.href = "execute_algorithm.php?numExecute="+caseAlgort+"&statechangeGraph="+changeGraph+"";
+		}
+		function executeChangeGraph(){
+			var value=$('#changeGraph').val();
+			if (value==0){
+				$('#changeGraph').val(1);
+			}else{
+				$('#changeGraph').val(0);
+			}
 		}
 	</script>
 </head>
@@ -19,18 +27,25 @@
 			<h2>WHAT ALGORITHM WANTS TO RUN?</h2>
 		</div>
 	    <div class="row">
+	    	<div class="col-md-12">
+	    		<label><strong>Every time execute change the graph?</strong></label>
+	    		<input type="checkbox" id="changeGraph" onclick="executeChangeGraph();" value="0">
+	    	</div>
 		    <div class="col-md-12">       <!-- Standard button -->
-				<button type="button" class="btn btn-default ribbon" onclick="runAlgorithm(0);">Create Graph</button>
+				<button type="button" class="btn btn-default ribbon" onclick="runAlgorithm(0);">Data Graph</button>
 				<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-				<button type="button" class="btn btn-primary ribbon" onclick="runAlgorithm(1);">Breadth First Search Algorithm - recursion.</button>
+				<button type="button" class="btn btn-danger ribbon" onclick="runAlgorithm(1);">Breadth First Search Algorithm.</button>
+				<button type="button" class="btn btn-primary ribbon" onclick="runAlgorithm(2);">Depth First Search Algorithm - recursion.</button>
 				<!-- Indicates a successful or positive action -->
-				<button type="button" class="btn btn-success ribbon" onclick="runAlgorithm(2);">Breadth First Search Algorithm - stack.</button>
+				<button type="button" class="btn btn-success ribbon" onclick="runAlgorithm(3);">Depth First Search Algorithm - stack.</button>
 				<!-- Contextual button for informational alert messages -->
-				<button type="button" class="btn btn-info ribbon" onclick="runAlgorithm(3);">Floyd&Warshall Algorithm</button>
+				<button type="button" class="btn btn-info ribbon" onclick="runAlgorithm(4);">Floyd&Warshall Algorithm</button>
 				<!-- Indicates caution should be taken with this action -->
-				<button type="button" class="btn btn-warning ribbon" onclick="runAlgorithm(4);">Bellman_Ford Algorithm</button>
+				<button type="button" class="btn btn-warning ribbon" onclick="runAlgorithm(5);">Bellman Ford Algorithm</button>
 				<!-- Indicates a dangerous or potentially negative action -->
-				<button type="button" class="btn btn-danger ribbon" onclick="runAlgorithm(5);">Dijkstra's Algorithm.</button>
+				<button type="button" class="btn btn-danger ribbon" onclick="runAlgorithm(6);">Dijkstra's Algorithm.</button>
+
+				<button type="button" class="btn btn-success ribbon" onclick="runAlgorithm(7);">Dijkstra's Prioty Queue Algorithm.</button>
 				<!-- Deemphasize a button by making it look like a link while maintaining button behavior -->
 			</div>
 		</div>

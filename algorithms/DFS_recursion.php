@@ -1,21 +1,15 @@
 <?php
 
-class Graph 
+class DFS_recursion 
 {
     protected $_len = 0;
     protected $_g = array();
     protected $_visited = array();
  
-    public function __construct()
+    public function __construct($dfsGraph)
     {
-        $this->_g = array(
-            array(0, 1, 1, 0, 0, 0),
-            array(1, 0, 0, 1, 0, 0),
-            array(1, 0, 0, 1, 1, 1),
-            array(0, 1, 1, 0, 1, 0),
-            array(0, 0, 1, 1, 0, 1),
-            array(0, 0, 1, 0, 1, 0),
-        );
+
+        $this->_g = $dfsGraph;
  
         $this->_len = count($this->_g);
  
@@ -29,19 +23,27 @@ class Graph
         }
     }
  
-    public function depthFirst($vertex)
+    public function getDepthFirst($vertex)
     {
         $this->_visited[$vertex] = 1;
         echo $vertex . "\n";
  
         for ($i = 0; $i < $this->_len; $i++) {
             if ($this->_g[$vertex][$i] == 1 && !$this->_visited[$i]) {
-                $this->depthFirst($i);
+                $this->getDepthFirst($i);
             }
         }
     }
 }
  
-$g = new Graph();
+/*        $gf = array(
+            array(0, 1, 1, 0, 0, 0),
+            array(1, 0, 0, 1, 0, 0),
+            array(1, 0, 0, 1, 1, 1),
+            array(0, 1, 1, 0, 1, 0),
+            array(0, 0, 1, 1, 0, 1),
+            array(0, 0, 1, 0, 1, 0),
+        );
+$g = new DFS_recursion($gf);
 // 2 0 1 3 4 5
-$g->depthFirst(2);
+$g->getDepthFirst(2);*/

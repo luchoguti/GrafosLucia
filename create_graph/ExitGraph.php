@@ -62,8 +62,8 @@ class ExitGraph extends Graph
 	  				
 	  				if($this->adjectMatriz[$j][$k][$l]==1){
  					
- 						$costGrahp1[$j][$k][$l]=rand(1,10);
- 						$costGrahp2[$j][$k][$l]=rand(-10,10);
+ 						$costGrahp1[$j][$k][$l]=rand(1,9);
+ 						$costGrahp2[$j][$k][$l]=rand(-9,9);
 
 	  				}
 
@@ -139,10 +139,9 @@ class ExitGraph extends Graph
 		$this->file .= $node;
 
 		$listMatrizGrade=(self::getListGrade());
-		echo "<pre>";
-		print_r($this->adjectMatriz);
 		for ($q=0; $q < count($this->adjectMatriz); $q++) { 
-
+			
+			//matriz adject
 			for ($r=0; $r < count($this->adjectMatriz[$q]); $r++) { 
 				
 				$stringAdject='';
@@ -151,15 +150,38 @@ class ExitGraph extends Graph
 					$stringAdject .= $this->adjectMatriz[$q][$s][$r];
 
 				}
-				$this->file .= '<br>'.$stringAdject;
+				$this->file .= '<br>'.$stringAdject.' -->matriz adject';
 			}
-			$stringGrade='';
+			//matriz Cost Positive
+			for ($r=0; $r < count($this->adjectMatriz[$q]); $r++) { 
+				
+				$stringCostPostive='';
+				for ($s=0; $s < count($this->adjectMatriz[$q][$r]) ; $s++) { 
+					
+					$stringCostPostive .= (isset($this->costGraphPositive[$q][$s][$r])) ? $this->costGraphPositive[$q][$s][$r] : 0 ;
 
+				}
+				$this->file .= '<br>'.$stringCostPostive.' -->Cost Positive';
+			}
+			//matriz Cost Positive and Negative
+			for ($r=0; $r < count($this->adjectMatriz[$q]); $r++) { 
+				
+				$stringCostPostiveNegative='';
+				for ($s=0; $s < count($this->adjectMatriz[$q][$r]) ; $s++) { 
+					
+					$stringCostPostiveNegative .= (isset($this->costGraphPositiveOrNega[$q][$s][$r])) ? $this->costGraphPositiveOrNega[$q][$s][$r] : 0 ;
+
+				}
+				$this->file .= '<br>'.$stringCostPostiveNegative.' -->Cost Positive and Negative';
+			}
+			//matriz ....
+			$stringGrade='';
 			for ($t=0; $t <= count($listMatrizGrade[$q]); $t++) { 
-			
+				
 				$stringGrade .= $listMatrizGrade[$q][$t];
 
 			}
+
 			$this->file .= '<br>'.$stringGrade;
 
 		}		

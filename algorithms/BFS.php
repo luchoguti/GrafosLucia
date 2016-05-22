@@ -15,7 +15,7 @@
  */
 //esta función lo que hace es buscar un nodo dentro del grafo
 function bfs($graph, $start, $end) {
-//Esta es una ´clase propia de PHP que se utiliza para trabajar colas
+//Esta es una clase propia de PHP que se utiliza para trabajar colas
     $queue = new SplQueue();
 //El metodo enqueue es propio de la clase SpLQueue, lo que hace el metodo es agregar elementos a la cola
     $queue->enqueue($start);
@@ -24,22 +24,24 @@ function bfs($graph, $start, $end) {
     
     while ($queue->count() > 0) {
         //Este metodo tambien es propio de la clase SqlQueue, lo que hace este metodo es eliminar elementos de la cola.
-        $node = $queue->dequeue();
-
-        ($graph[$node]);
+        $node = $queue->dequeue();  
         # We've found what we want
         if ($node === $end) {
             return true;
         }
-        foreach ($graph[$node] as $neighbour) {
+        if(isset($graph[$node])){
+            foreach ($graph[$node] as $neighbour) {
 
-            if (!in_array($neighbour, $visited)) {
-                # Mark neighbour visited
-                $visited[] = $neighbour;
-                # Enqueue node
-                $queue->enqueue($neighbour);
+                if (!in_array($neighbour, $visited)) {
+                    # Mark neighbour visited
+                    $visited[] = $neighbour;
+                    # Enqueue node
+                    $queue->enqueue($neighbour);
+                }
             }
-        };
+        }else{
+            return false;
+        }
         
     }
     return false;
@@ -62,34 +64,43 @@ function bfs_path($graph, $start, $end) {
         $path = $queue->dequeue();
         # Get the last node on the path
         # so we can check if we're at the end
-        print_r($path);
+        //print_r($path);
         $node = $path[sizeof($path) - 1];
-        
         if ($node === $end) {
-            return $path;
-        }
-        foreach ($graph[$node] as $neighbour) {
-            if (!in_array($neighbour, $visited)) {
-                $visited[] = $neighbour;
-                # Build new path appending the neighbour then and enqueue it
-                $new_path = $path;
-                $new_path[] = $neighbour;
-                $queue->enqueue($new_path);
+            $stringdataPath='Path is ';
+            $a=0;
+            foreach ($path as $data_Path) {
+               $stringdataPath.=($a==0) ?  $data_Path: '-->'.$data_Path;
+               $a++;
             }
-        };
+            return $stringdataPath;
+        }
+        if(isset($graph[$node])){
+            foreach ($graph[$node] as $neighbour) {
+                if (!in_array($neighbour, $visited)) {
+                    $visited[] = $neighbour;
+                    # Build new path appending the neighbour then and enqueue it
+                    $new_path = $path;
+                    $new_path[] = $neighbour;
+                    $queue->enqueue($new_path);
+                }
+            }
+        }else{
+            $stringdataPath='Found no way.';
+            return $stringdataPath;
+        }
     }
     return false;
 }
 
 
-$graph = [
+/*$graph = [
     'A' => ['B', 'C'],
     'B' => ['A', 'D'],
     'D' => ['B'],
     'C' => ['A',],
 ];
-echo "<pre>";
-print_r($graph);
-//bfs($graph, 'A', 'D'); // true
-/*bfs($graph, 'A', 'G'); // false*/
-print_r(bfs_path($graph, 'A', 'D')); // ['A', 'B', 'D']
+bfs($graph, 'A', 'D'); // true
+bfs($graph, 'A', 'G'); // false
+echo '<pre>';
+print_r(bfs_path($graph, 'A', 'D')); // ['A', 'B', 'D']*/

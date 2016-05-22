@@ -22,11 +22,12 @@
     foreach ($sp as $value) {
         echo $nodes[$value] . ' ';
     }
-    echo '</strong>';
+    echo '</strong><br>';
+print_r($fw->get_distance(0,2));
 
     $sp = $fw->get_path(1,3);
 
-    echo 'The sortest path from a to c is: <strong>';
+    echo 'The sortest path from b to d is: <strong>';
     foreach ($sp as $value) {
         echo $nodes[$value] . ' ';
     }
@@ -34,6 +35,6 @@
 
     
 
-    print_r($fw->get_distance(0,2));
+    print_r($fw->get_distance(1,3));
 
 ?>

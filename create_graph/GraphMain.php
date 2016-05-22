@@ -26,9 +26,9 @@
 				for ($k=0; $k < $size ; $k++) { 
 					
 					$numberRandom=self::randomFloat();
-					//the main diagonal always have zeros
-					if($j!=$k){
-						$egde=($numberRandom <= '0.5')?0:1;
+					//the main diagonal always have zeros and it is upper triangular matrix
+					if($k!=$j){
+						$egde=($numberRandom < '0.5')?0:1;						
 					}else{
 						$egde=0;
 					}

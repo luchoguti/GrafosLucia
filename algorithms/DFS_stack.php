@@ -1,12 +1,12 @@
 <?php
  
-class Graph{
+class DFS_stack{
  
     private $len = 0;
     private $graph = array();
     private $visited = array();
  
-    public function __construct(){
+    public function __construct($dfsGraph){
  //Se crea el grafo aleatoreamente
         /*$this->graph = array(
                             array(0, 1, 1, 0, 0, 0),
@@ -16,12 +16,7 @@ class Graph{
                             array(0, 0, 1, 1, 0, 1),
                             array(0, 0, 1, 0, 1, 0)
                         );*/
-        $this->graph = array(
-                            array(0, 1, 1, 0),
-                            array(1, 0, 0, 1),
-                            array(1, 0, 0, 0),
-                            array(0, 1, 0, 0)
-                        );
+        $this->graph = $dfsGraph;
  //Se realiza el conteo de las niveles del grafo
         $this->len = count($this->graph);
  //Se hace instancia del metodo int
@@ -37,7 +32,7 @@ class Graph{
     }
  //En este metodo lo primero que se hace es la instancia al atributo visited en el nivel dado en el parametro y se le 
  //asigna un uno.
-    public function depthFirst($vertex){
+    public function getDepthFirst($vertex){
        /*echo "<pre>";
         print_r($this->graph);
         echo "Grafo------------------";
@@ -52,7 +47,7 @@ class Graph{
  // Si es igual a uno se verifica la siguiente parte de la condicional, donde si la posicion del atributo es igual a 0 es verdadero
  // Si el y(&&) se cumple se llama a si mismo enviando como parametro el nivel visitado.
             if ($this->graph[$vertex][$i] == 1 && !$this->visited[$i]) {
-                $this->depthFirst($i);
+                $this->getDepthFirst($i);
             }
         }
  //Imprime el orden de consulta de los niveles en forma de pila "Primero en entrar primero en salir" (Alias el First in first out "FIFO")
@@ -60,7 +55,7 @@ class Graph{
     }
 }
  //Instancia de la clase graph y accede al objeto principal depthFirst= desde que nivel se quiere que empiece la busqueda parametro
-$g = new Graph();
-$g->depthFirst(2);
+/*$g = new DFS_stack();
+$g->getDepthFirst(2);*/
  
 ?>

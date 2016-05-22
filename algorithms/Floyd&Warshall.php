@@ -49,15 +49,22 @@ class FloydWarshall {
     * @param array $graph Graph matrice.
     * @param array $nodenames Node names as an array.
     */
+   /* Esta función recibe los parametros que sen envian en este caso, grafo que en este caso son los pesos de cada vertice
+   y nodename en este caso los nombres de cada nodo*/
     public function __construct($graph, $nodenames='') {
 
+        /* al atributo weights se le asignan el valor que trae el graph. */
         $this->weights = $graph;
+        /* al atrinuto nodes le estoy asignando la cantidad de posiciones del arreglo weights*/
         $this->nodes   = count($this->weights);
+        /* Se realiza la comparacion 1. se verifica que el arreglo que tiene los nodos no esten vacios y que el conteo 
+        de la cantidad de nodos y el conteo de la cantidad de posiciones  del arreeglo nodes sean iguales*/
         if ( ! empty($nodenames) && $this->nodes == count($nodenames) ) {
+           /* Se hace la asignación al atributo nodenames del parametro nodenames*/
             $this->nodenames = $nodenames;
         }
+        /* se esta haciendo instancia del metodo*/
         $this->__floydwarshall();
-
     }
 
     /**
@@ -81,7 +88,8 @@ class FloydWarshall {
         }
 
         // Algorithm
-
+        /* En este ciclo se realiza la comparación de los caminos para encontrar el camino mas cortos en estas sentencias se evidencia
+        la formula principal del metodo */
         for ( $k = 0; $k < $this->nodes; $k++ ) {
             for ( $i = 0; $i < $this->nodes; $i++ ) {
                 for ( $j = 0; $j < $this->nodes; $j++ ) {
@@ -106,6 +114,7 @@ class FloydWarshall {
     private function __get_path($i, $j) {
 
         if ( $i != $j ) {
+            /*Si i y j son diferentes el ingresa nuevamnete al metodo y en este paso se esta haciendo recursividad*/
             $this->__get_path($i, $this->pred[$i][$j]);
         }
         array_push($this->tmp, $j);
@@ -152,6 +161,7 @@ class FloydWarshall {
     * @return array Returns an array of costs.
     */
     public function get_distance($i, $j) {
+       /*La distancia es la sumatoria de los pesos del camino mas corto*/
         return $this->dist[$i][$j];
     }
 
@@ -167,7 +177,6 @@ class FloydWarshall {
     * @return void
     */
     public function print_graph () {
-
 
         if ( empty($_SERVER['argv']) ) {
             echo '<strong>Graph</strong><br />';

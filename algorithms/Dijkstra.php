@@ -75,5 +75,27 @@ print_r($g);
 	//array_unshift($path,$u);
 
 	/*print_r($path);*/
-	//return $path;
+	return $path;
 }
+
+				/*$graph = array(
+					array("a","b",8),
+					array("a","c",9),
+					array("a","f",13),
+					array("b","c",10),
+					array("b","d",5),
+					array("c","d",11),
+					array("c","f",32),
+					array("d","e",23),
+					array("e","f",9),
+				);
+				$path = dijstra($graph,"a","d");
+
+				echo "The path is [".implode(", ", $path)."]\n";
+
+				$p= INF;
+				$j= 0;
+
+				if($p < $j){
+					echo 'true';
+				}				*/
