@@ -1,5 +1,5 @@
 <?php
-class Dijkstra
+class dijkstraPriorityQueue
 {
   protected $graph;
 
@@ -30,10 +30,10 @@ class Dijkstra
 
     }
 
-    // Count the elements print PriorityQueue insert 
-/*    echo "count ->" . $Q->count() . PHP_EOL;
+    // Count the elements print PriorityQueue insert ->start tested
+   //echo "count ->" . $Q->count() . PHP_EOL;
 
-    $Q->setExtractFlags(SplPriorityQueue::EXTR_BOTH);
+  /*  $Q->setExtractFlags(SplPriorityQueue::EXTR_BOTH);
 
     // Go at the node from the top of the queue
     $Q->top();
@@ -44,7 +44,8 @@ class Dijkstra
         print_r($Q->current());
         echo PHP_EOL;
         $Q->next();
-    }*/
+    }->finish tested*/
+
     // initial distance at source is 0
     $d[$source] = 0;
     /* Este ciclo termina cuando no tenga nodos en la cola, es decir se extraigan todos sus nodos de la cola.*/
@@ -81,42 +82,40 @@ print_r($pi);
     // traverse from target to source
     while (isset($pi[$u]) && $pi[$u]) {
       $S->push($u);
-      $dist += $this->graph[$u][$pi[$u]]; // add distance to predecessor
       $u = $pi[$u];
     }
-
+print_r($S);
     // stack will be empty if there is no route back
     if ($S->isEmpty()) {
-      echo "No route from $source to $targetn";
+      echo "No route from $source to $target";
     }
     else {
       // add the source node and print the path in reverse
       // (LIFO) order
       $S->push($source);
-      echo "$dist:";
+      echo "The length is :$d[$target] <br>";
       $sep = '';
       foreach ($S as $v) {
         echo $sep, $v;
         $sep = '->';
       }
-      //  echo "n";
     }
   }
 }
 
-$graph = array(
+/*$graph = array(
   'A' => array('B' => 3, 'D' => 3, 'F' => 6),
   'B' => array('A' => 3, 'D' => 1, 'E' => 3),
   'C' => array('E' => 2, 'F' => 3),
   'D' => array('A' => 3, 'B' => 1, 'E' => 1, 'F' => 2),
   'E' => array('B' => 3, 'C' => 2, 'D' => 1, 'F' => 5),
   'F' => array('A' => 6, 'C' => 3, 'D' => 2, 'E' => 5),
-  );
+);
 
-$g = new Dijkstra($graph);
+$g = new dijkstraPriorityQueue($graph);
 
 $g->shortestPath('D', 'C'); echo "<br>";  // 3:D->E->C
-/*$g->shortestPath('C', 'A'); echo "<br>"; // 6:C->E->D->A
+$g->shortestPath('C', 'A'); echo "<br>"; // 6:C->E->D->A
 $g->shortestPath('B', 'F'); echo "<br>"; // 3:B->D->F
 $g->shortestPath('F', 'A'); echo "<br>"; // 5:F->D->A 
 $g->shortestPath('A', 'C');  // No route from A to G*/

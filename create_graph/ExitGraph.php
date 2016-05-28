@@ -16,7 +16,7 @@ class ExitGraph extends Graph
 	protected $file;
 	protected $valueDimensions;
 	protected $valueNum_graph;
-	protected $adjectMatriz = array();
+	protected $Matriz = array();
 	protected $costGraphPositive = array();
 	protected $costGraphPositiveOrNega = array();
 
@@ -49,10 +49,12 @@ class ExitGraph extends Graph
 		$this->valueNum_graph =$num_graph;
 
 		self::setArtist_graph();
+
+		$this->setCreateFile_output();
     
   	}
 
-  	protected function setArtist_graph(){
+  	private function setArtist_graph(){
 
   		$costGrahp1=array();
   		$costGrahp2=array();
@@ -77,7 +79,7 @@ class ExitGraph extends Graph
 
   	}
 
-	protected function listGrade($matriz){
+	private function listGrade($matriz){
 
 
 		$this->matrizGraph = $matriz;
@@ -131,7 +133,21 @@ class ExitGraph extends Graph
 
 	}
 
-	public function setCreateFile_output(){
+	public function getCostGraphs(){
+
+		$costsGraph[0]=$this->costGraphPositive;
+		$costsGraph[1]=$this->costGraphPositiveOrNega;
+
+		return $costsGraph;
+
+	}
+	public function getGraphAdject(){
+
+		return $this->adjectMatriz;
+
+	}
+
+	private function setCreateFile_output(){
 
 		$node = $this->valueDimensions*2;
 		$this->file = $this->valueNum_graph.'<br>';

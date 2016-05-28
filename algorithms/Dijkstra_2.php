@@ -15,12 +15,12 @@ function dijkstra($graphs, $source, $target){
 
 		$Q[$val] = 99999;
 		$Q[$source] = 0;
-	
+		
 	}
-	
+
 	//start calculating
 	while(!empty($Q)){
-		$min = array_search(min($Q), $Q);//the most min weight
+		$min = array_search(min($Q), $Q);//the most min weight, el min busca el valor minimo mas bajo dentro de mi arreglo y el array search busca la clave de mi arreglo es decir la posición
 		if($min == $target){
 			break;
 		}
@@ -28,13 +28,15 @@ function dijkstra($graphs, $source, $target){
 			if(!empty($Q[$key]) && $Q[$min] + $val < $Q[$key]) {
 				$Q[$key] = $Q[$min] + $val;
 				$S[$key] = array($min, $Q[$key]);
+
 			}
 		}
-		unset($Q[$min]);
+		unset($Q[$min]);// borra la posicion dentro de un arreglo
 		
 	}
-
-	if (!array_key_exists($target, $S)) {
+					echo "<pre>";
+	print_r($S);
+	if (!array_key_exists($target, $S)) { //Verifica si el valor ingresado como nodo final no existe dentro de mi arreglo S que es el que contiene el peso del vertice entre nodo inicial y nodo final
 	    $result.="Found no way.";
 	    return $result;
 	}
@@ -48,11 +50,12 @@ function dijkstra($graphs, $source, $target){
 	}
 	$path[] = $source;
 	$path = array_reverse($path);
-
+echo "<pre>";
+print_r($path); 
 	//print result
 	$result.="From $source to $target";
 	$result.="<br />The length is ".$S[$target][1];
-	$result.="<br />Path is ".implode('->', $path);
+	$result.="<br />Path is ".implode('->', $path); //esta convirtiendo el arreglo Path que contiene el camino mas corto y lo muestra como string
 
 	return $result;
 	
@@ -84,6 +87,6 @@ echo "<pre>";
 print_r($graphs);
 //the start and the end
 $source = 1;
-$target = 6;*/
+$target = 6;
 
-//echo dijkstra($graphs,$source,$target);
+echo dijkstra($graphs,$source,$target);*/
